@@ -8,6 +8,8 @@
     body {
       background: linear-gradient(135deg, #fff1f5, #ffe4e6);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
     .circle-bar {
       width: 100px;
@@ -26,6 +28,15 @@
       font-size: 1rem;
       font-weight: bold;
     }
+
+    @media print {
+ 
+    html, body {
+      width: 100%;
+      height: auto;
+      overflow: visible !important;
+    }
+}
   </style>
 </head>
 <body class="text-gray-800">
@@ -193,20 +204,21 @@ Eager to learn new skills and excel in the travel industry.</p>
 
   <script>
   function downloadPDF() {
-    const element = document.getElementById("resume");
-    const opt = {
-      margin:       0.5,
-      filename:     'Muntaha_Nazir_Dar_Resume.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+  const element = document.getElementById("resume");
+  const opt = {
+    margin: 0,
+    filename: 'Muntaha_Nazir_Dar_Resume.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: {
+      scale: 4,
+      useCORS: true,
+      scrollY: 0,
+    },
+    jsPDF: { unit: 'px', format: 'a4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(element).save();
+}
 
-    // Wait for GSAP animations to finish before rendering
-    setTimeout(() => {
-      html2pdf().set(opt).from(element).save();
-    }, 500);
-  }
 </script>
 
 </body>
