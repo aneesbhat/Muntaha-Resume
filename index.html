@@ -204,22 +204,30 @@ Eager to learn new skills and excel in the travel industry.</p>
 
   <script>
   function downloadPDF() {
-  const element = document.getElementById("resume");
-  const opt = {
-    margin: 0,
-    filename: 'Muntaha_Nazir_Dar_Resume.pdf',
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: {
-      scale: 4,
-      useCORS: true,
-      scrollY: 0,
-    },
-    jsPDF: { unit: 'px', format: 'a4', orientation: 'portrait' }
-  };
-  html2pdf().set(opt).from(element).save();
-}
+    const element = document.getElementById("resume");
 
+    const opt = {
+      margin: 0,
+      filename: "Muntaha_Nazir_Dar_Resume.pdf",
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: {
+        scale: 4,
+        useCORS: true,
+        scrollY: 0,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight
+      },
+      jsPDF: {
+        unit: "px",
+        format: [element.offsetWidth, element.offsetHeight],
+        orientation: "portrait"
+      }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  }
 </script>
+
 
 </body>
 </html>
